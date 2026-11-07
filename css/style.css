@@ -6,14 +6,6 @@
     --dark: #02245B;
 }
 
-.back-to-top {
-    position: fixed;
-    display: none;
-    right: 30px;
-    bottom: 30px;
-    z-index: 99;
-}
-
 h1,
 h2,
 .h1,
@@ -91,32 +83,9 @@ h6,
 }
 
 
-.topbar-right {
-    position: relative;
-    background: var(--primary);
+body > .container-fluid.bg-dark.px-0 {
+    display: none;
 }
-
-.topbar-right a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.topbar-right a:hover {
-    color: inherit;
-    text-decoration: underline;
-}
-
-.topbar-right::before {
-    position: absolute;
-    content: "";
-    width: 30px;
-    height: 100%;
-    top: 0;
-    left: -15px;
-    transform: skewX(-30deg);
-    background-color: var(--primary);
-}
-
 
 /*** Navbar ***/
 .navbar.sticky-top {
@@ -209,11 +178,6 @@ h6,
     background-color: rgba(2, 36, 91, .58) !important;
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
-}
-
-.home-topbar .topbar-right,
-.home-topbar .topbar-right::before {
-    background-color: transparent;
 }
 
 .home-navbar {
@@ -361,6 +325,26 @@ h6,
     margin-bottom: 1.5rem;
 }
 
+.about-image-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.about-image-item {
+    flex: 1 1 0;
+    min-height: 240px;
+    overflow: hidden;
+}
+
+.about-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 240px;
+    object-fit: cover;
+}
+
 .about-experience .display-2 {
     margin-bottom: .25rem;
 }
@@ -392,8 +376,23 @@ h6,
     text-align: center;
 }
 
+.stats-traffic-divider {
+    border-left: 1px solid rgba(255, 255, 255, .55);
+}
+
 .stats-item {
     min-width: 0;
+}
+
+.stats-traffic-item {
+    border-top: 1px solid rgba(255, 255, 255, .55) !important;
+}
+
+@media (min-width: 1200px) {
+    .stats-traffic-item {
+        border-top: 0 !important;
+        border-left: 1px solid rgba(255, 255, 255, .55) !important;
+    }
 }
 
 .stats-value {
@@ -401,6 +400,11 @@ h6,
     font-weight: 300;
     line-height: 1.25;
     overflow-wrap: anywhere;
+}
+
+body p {
+    text-align: justify;
+    hyphens: auto;
 }
 
 .stats-caption {
@@ -454,6 +458,10 @@ h6,
 @media (max-width: 575.98px) {
     .about-experience {
         margin-top: .25rem;
+    }
+
+    body p {
+        text-align: left;
     }
 }
 
@@ -566,21 +574,9 @@ h6,
 /*** Service ***/
 .service-item {
     position: relative;
+    height: 360px;
     margin: 65px 0 25px 0;
     box-shadow: 0 0 45px rgba(0, 0, 0, .07);
-}
-
-.service-item .service-img {
-    position: absolute;
-    padding: 12px;
-    width: 130px;
-    height: 130px;
-    top: -65px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #FFFFFF;
-    box-shadow: 0 0 45px rgba(0, 0, 0, .09);
-    z-index: 2;
 }
 
 .service-item .service-detail {
@@ -605,8 +601,13 @@ h6,
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: #FFFFFF;
+    background: rgba(2, 36, 91, .38);
+    color: #FFFFFF;
     transition: .5s;
+}
+
+.service-item .service-title h3 {
+    color: #FFFFFF;
 }
 
 .service-item:hover .service-title {
@@ -672,9 +673,20 @@ h6,
 
 /* Link pada foto/judul kartu dan navigasi kembali di halaman detail. */
 .project-service-link {
+    position: absolute;
+    inset: 0;
     display: block;
+    overflow: hidden;
     color: inherit;
     text-decoration: none;
+}
+
+.project-service-link > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .project-service-link:hover,
@@ -778,13 +790,17 @@ h6,
 
 .service-showcase-column {
     overflow: hidden;
-    padding: 1.5rem 0 0;
+    padding: 0;
     background: #FAFAFA;
     text-align: center;
 }
 
 .service-showcase-name {
-    margin: 0 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 128px;
+    margin: 0 1rem;
     color: #1A0F5C;
     font-size: clamp(2rem, 4.2vw, 3.5rem);
     font-weight: 800 !important;
@@ -901,6 +917,10 @@ h6,
 }
 
 @media (max-width: 767.98px) {
+    .service-item {
+        height: 320px;
+    }
+
     .organization-heading h2 {
         gap: .5rem;
         font-size: 1.25rem;
@@ -919,6 +939,7 @@ h6,
     }
 
     .service-showcase-name {
+        height: 120px;
         font-size: clamp(2rem, 8vw, 3rem);
     }
 
@@ -937,6 +958,54 @@ h6,
 
 
 /*** Team ***/
+.team-section-heading {
+    width: 100%;
+    max-width: 600px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+
+.team-section-heading p,
+.team-section-heading h1 {
+    text-align: center;
+}
+
+.team-item {
+    height: 100%;
+    overflow: hidden;
+    background: #FFFFFF;
+}
+
+.team-item > img {
+    display: block;
+    width: 100%;
+    height: 400px !important;
+    object-fit: cover;
+    object-position: center center !important;
+}
+
+.team-item > .d-flex {
+    display: block !important;
+}
+
+.team-item > .d-flex > .flex-shrink-0 {
+    display: none;
+}
+
+.team-item > .d-flex > div:nth-child(2) {
+    width: 100%;
+    height: 90px !important;
+    padding-left: 0 !important;
+    text-align: center;
+}
+
+.team-item > .d-flex > div:nth-child(2) h5,
+.team-item > .d-flex > div:nth-child(2) > span {
+    width: 100%;
+    text-align: center;
+}
+
 .team-item .team-social {
     position: absolute;
     width: 100%;
@@ -1051,15 +1120,6 @@ h6,
     color: #B0B9AE;
 }
 
-.footer-contact-link {
-    color: inherit;
-    text-decoration: none;
-}
-
-.footer-contact-link:hover {
-    color: var(--light);
-}
-
 .footer-map-frame {
     display: block;
     width: 100%;
@@ -1107,4 +1167,9 @@ h6,
 .copyright {
     color: #B0B9AE;
     border-top: 1px solid rgba(255, 255, 255, .1);
+    text-align: center;
+}
+
+.copyright p {
+    text-align: center;
 }
